@@ -1,0 +1,16 @@
+{% extends "diaryhome.html" %}
+{% load static %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; padding-top: 50px">
+    <h1>Q&A</h1>
+</div>
+
+<h2>제목: {{post.title}} </h2>
+<h4>작성 시간: {{post.created_at}} </h4>
+<hr>
+<p> {{post.body}} </p>
+
+<a href="{% url 'post_update' post.id %}">게시글 수정하기</a>
+<a href="{% url 'post_delete' post.id %}">게시글 삭제하기</a>
+{% endblock %}

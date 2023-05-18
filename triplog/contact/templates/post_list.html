@@ -1,0 +1,24 @@
+{% extends "diaryhome.html" %}
+{% load static %}
+
+{% block content %}
+<br>
+<div div style="display: flex; justify-content: center; padding-top: 50px">
+    <h1>Q&A</h1>
+</div>
+<br>
+<div style="display: flex; justify-content: center">
+    <a href="{%url 'create' %}">
+        <h2>글작성</h2>
+    </a>
+</div>
+<br>
+
+<div style="padding-left: 100px; padding-right: 100px;">
+    {% for post in posts %}
+    <h3><a href="{% url 'post_detail' post.id %}">{{post.title}}</a></h3>
+    {{post.body}}
+    <hr>
+    {% endfor %}
+</div>
+{% endblock %}
