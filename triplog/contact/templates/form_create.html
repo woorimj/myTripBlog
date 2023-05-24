@@ -7,7 +7,7 @@
 </div>
 <br>
 <div style="display: flex; justify-content: center">
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
             {{ form.as_table }} <!-- 세번째 인자로 넘겨준 데이터 -->

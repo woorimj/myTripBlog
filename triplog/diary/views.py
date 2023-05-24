@@ -5,6 +5,6 @@ def home(request):
 	return render(request, "diaryIndex.html")
 
 def post(request): 
-	return render(request, "post.html")
+	return render(request, "diaryIndex.html")
 
 

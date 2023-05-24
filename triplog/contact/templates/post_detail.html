@@ -9,8 +9,28 @@
 <h2>제목: {{post.title}} </h2>
 <h4>작성 시간: {{post.created_at}} </h4>
 <hr>
+<h3>사진</h3>
+{% if post.photo %}
+<img src="{{ post.photo.url }}" alt="" height="300">
+{% endif %}
 <p> {{post.body}} </p>
 
 <a href="{% url 'post_update' post.id %}">게시글 수정하기</a>
 <a href="{% url 'post_delete' post.id %}">게시글 삭제하기</a>
+
+<br><br>
+<hr>
+<h4>댓글</h4>
+<form method="POST" action="{% url 'create_comment' post.id %}">
+    {% csrf_token %}
+    {{comment_form}}
+    <input type="submit">
+</form>
+<hr>
+{% for comment in post.comment_set.all %}
+<p>{{ comment }}</p>
+<a href="{% url 'update_comment' post.id comment.id %}">수정하기</a>
+<a href="{% url 'delete_comment' post.id comment.id %}">삭제하기</a>
+<hr>
+{% endfor %}
 {% endblock %}
