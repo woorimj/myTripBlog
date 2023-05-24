@@ -6,7 +6,7 @@ class Post(models.Model):
     body = models.TextField(verbose_name="내용", default="")
     created_at = models.DateTimeField(verbose_name="작성일", auto_now_add=True)
     photo = models.ImageField(verbose_name="이미지", blank=True, null=True, upload_to='blog_photo')
-    
+
     def __str__(self): 
         return self.title
 
