@@ -2,13 +2,14 @@
 {% load static %}
 
 {% block content %}
-
-
-{% for post in posts %}
-<h3> {{post.title}} </h3>
-{{post.body}}
-<hr>
-{% endfor %}
-
-
+<div style="padding-left: 100px; padding-right: 100px;">
+    {% for post in posts %}
+    <h3><a href="{% url 'diary_detail' post.id %}">{{post.title}}</a></h3>
+    {% if post.photo %}
+        <img src="{{ post.photo.url }}" alt="" height="300">
+    {% endif %}
+    {{post.body}}
+    <hr>
+    {% endfor %}
+</div>
 {% endblock %}
