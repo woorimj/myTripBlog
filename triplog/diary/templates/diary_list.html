@@ -1,15 +1,72 @@
 {% extends "diaryhome.html" %}
 {% load static %}
 
+{% block style %}
+<style>
+    body {
+        margin: 0;
+    }
+
+    .s-horizon {
+        float: left;
+    }
+
+    .s-horixon_wrap::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .content1 {
+        width: 31%;
+        height: 500px;
+        border: 1px solid;
+        margin: 1%;
+    }
+
+    .content1_wrap {
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .content2 {
+        width: 100%;
+        height: 500px;
+    }
+</style>
+
+{% endblock %}
+
 {% block content %}
-<div style="padding-left: 100px; padding-right: 100px;">
+<div class="content1_wrap s-horizon_wrap">
     {% for post in posts %}
-    <h3><a href="{% url 'diary_detail' post.id %}">{{post.title}}</a></h3>
-    {% if post.photo %}
+    <div class="content1 s-horizon">
+        <h3><a href="{% url 'diary_detail' post.id %}">{{post.title}}</a></h3>
+        <br>
+        {% if post.photo %}
         <img src="{{ post.photo.url }}" alt="" height="300">
-    {% endif %}
-    {{post.body}}
-    <hr>
+        {% endif %}
+    </div>
     {% endfor %}
 </div>
+
+<!--pagenation-->
+<div>
+    {% if posts.has_previous %} <!--지금 잘라서 보여주는 posts의 목록이 이전 페이지가 있다면-->
+    <a href="?page=1">첫 페이지</a>
+    <a href="?page={{posts.previous_page_number}}">이전 페이지</a> <!--posts의 이전 페이지 숫자를 반환해라-->
+    {% endif %}
+
+    <span> {{ posts.number }} </span> <!--현재 페이지 넘버-->
+    <span> / </span>
+    <span> {{ posts.paginator.num_pages }} </span> <!--잘린 posts가 갖고 있는 총 페이지 수 반환-->
+
+    {% if posts.has_next %} <!--다음 페이지가 있다면-->
+    <a href="?page={{posts.next_page_number}}">다음 페이지</a>
+    <a href="?page={{posts.paginator.num_pages}}">마지막 페이지</a>
+    {% endif %}
+
+</div>
+
 {% endblock %}

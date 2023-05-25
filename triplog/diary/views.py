@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 from .forms import PostModelForm
 from .models import Post
 
@@ -24,6 +25,9 @@ def diary_create(request):
 
 def diary_list(request):
     posts = Post.objects.all().order_by('-created_at')
+    paginator = Paginator(posts, 5)
+    pagnum = request.GET.get('page')
+    posts = paginator.get_page(pagnum)
     return render(request, 'diary_list.html', {'posts':posts})
 
 def diary_detail(request, id):
