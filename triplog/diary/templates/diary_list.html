@@ -20,7 +20,7 @@
     .content1 {
         width: 31%;
         height: 500px;
-        border: 1px solid;
+        border: 2px solid;
         margin: 1%;
     }
 
@@ -85,15 +85,17 @@
     </div>
 </div>
 
-<div class="content1_wrap s-horizon_wrap">
+<div>
     {% for post in posts %}
     <div class="content1 s-horizon">
-        <h3><a href="{% url 'diary_detail' post.id %}">{{post.title}}</a></h3>
-        작성자: {{post.author}}<br>
-        <br>
-        {% if post.photo %}
-        <img src="{{ post.photo.url }}" alt="" height="300">
-        {% endif %}
+        <div style="text-align: center;">
+            <h3><a href="{% url 'diary_detail' post.id %}">{{post.title}}</a></h3>
+            작성자: {{post.author}}<br>
+            <br>
+            {% if post.photo %}
+            <img src="{{ post.photo.url }}" alt="" width="380px" height="380px">
+            {% endif %}
+        </div>
     </div>
     {% endfor %}
 </div>
