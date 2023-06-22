@@ -46,6 +46,9 @@
             {% if user.is_authenticated %}
             <button class="btn btn-primary" id="button-search" type="button" onclick="location.href='create'">글
                 작성</button>
+            {% else %}
+            <br>
+            <h2>로그인해주세요!!</h2>
             {% endif %}
         </div>
         <br>
