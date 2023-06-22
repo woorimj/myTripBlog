@@ -34,6 +34,19 @@
         width: 100%;
         height: 500px;
     }
+
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .button:hover {
+        background-color: #555;
+    }
 </style>
 
 {% endblock %}
@@ -55,8 +68,8 @@
         <!--pagenation-->
         <div class="text-center">
             {% if posts.has_previous %} <!--지금 잘라서 보여주는 posts의 목록이 이전 페이지가 있다면-->
-            <a href="?page=1">첫 페이지</a>
-            <a href="?page={{posts.previous_page_number}}">이전 페이지</a> <!--posts의 이전 페이지 숫자를 반환해라-->
+            <a href="?page=1" class="button">첫 페이지</a>
+            <a href="?page={{posts.previous_page_number}}" class="button">이전 페이지</a> <!--posts의 이전 페이지 숫자를 반환해라-->
             {% endif %}
 
             <span> {{ posts.number }} </span> <!--현재 페이지 넘버-->
@@ -64,8 +77,8 @@
             <span> {{ posts.paginator.num_pages }} </span> <!--잘린 posts가 갖고 있는 총 페이지 수 반환-->
 
             {% if posts.has_next %} <!--다음 페이지가 있다면-->
-            <a href="?page={{posts.next_page_number}}">다음 페이지</a>
-            <a href="?page={{posts.paginator.num_pages}}">마지막 페이지</a>
+            <a href="?page={{posts.next_page_number}}" class="button">다음 페이지</a>
+            <a href="?page={{posts.paginator.num_pages}}" class="button">마지막 페이지</a>
             {% endif %}
         </div>
 

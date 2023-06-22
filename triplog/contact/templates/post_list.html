@@ -2,17 +2,32 @@
 {% load static %}
 
 {% block content %}
+<style>
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .button:hover {
+        background-color: #555;
+    }
+</style>
+
 <br>
 <div div style="display: flex; justify-content: center; padding-top: 50px">
     <h1>Q&A</h1>
 </div>
 <br>
 <div style="display: flex; justify-content: center">
-    <a href="{%url 'create' %}">
-        {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
+    <a href="{%url 'create' %}" class="button">
         <h2>글작성</h2>
-        {% endif %}
     </a>
+    {% endif %}
 </div>
 <br>
 
@@ -28,8 +43,8 @@
 <div style="display: flex; justify-content: center">
     <!-- 페이지네이션 -->
     {% if posts.has_previous %}
-    <a href="?page=1">첫 페이지</a>
-    <a href="?page={{posts.previous_page_number}}">이전 페이지</a>
+    <a href="?page=1" class="button">첫 페이지</a>
+    <a href="?page={{posts.previous_page_number}}" class="button">이전 페이지</a>
     {% endif %}
 
     <span> {{ posts.number }} </span>
@@ -37,8 +52,8 @@
     <span> {{ posts.paginator.num_pages }} </span>
 
     {% if posts.has_next %}
-    <a href="?page={{posts.next_page_number}}">다음 페이지</a>
-    <a href="?page={{posts.paginator.num_pages}}">마지막 페이지</a>
+    <a href="?page={{posts.next_page_number}}" class="button">다음 페이지</a>
+    <a href="?page={{posts.paginator.num_pages}}" class="button">마지막 페이지</a>
     {% endif %}
     </body>
 </div>

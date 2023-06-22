@@ -1,21 +1,37 @@
 {% extends "diaryhome.html" %}
 {% load static %}
-
 {% block content %}
-<h2>제목: {{post.title}} </h2>
-<h4>작성 시간: {{post.created_at}} </h4>
-<h4>작성자: {{ post.author }}</h4>
-<hr>
-<h3>사진</h3>
-{% if post.photo %}
-<img src="{{ post.photo.url }}" alt="" height="300">
-{% endif %}
-<p> {{post.body}} </p>
-{% if request.user == post.author %}
-<hr>
-<a href="{% url 'diary_update' post.id %}">게시글 수정하기</a>
-<br>
-<a href="{% url 'diary_delete' post.id %}">게시글 삭제하기</a>
-<br><br>
+<style>
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .button:hover {
+        background-color: #555;
+    }
+</style>
+
+<div class="text-center">
+    <br><br>
+    <h2>제목: {{post.title}} </h2>
+    <h4>작성 시간: {{post.created_at}} </h4>
+    <h4>작성자: {{ post.author }}</h4>
+    <hr>
+    {% if post.photo %}
+    <img src="{{ post.photo.url }}" alt="" height="300">
+    {% endif %}
+    <p> {{post.body}} </p>
+    {% if request.user == post.author %}
+    <hr>
+    <a href="{% url 'diary_update' post.id %}" class="button">게시글 수정하기</a>
+    <a href="{% url 'diary_delete' post.id %}" class="button">게시글 삭제하기</a>
+    <br><br>
+</div>
+
 {% endif %}
 {% endblock %}

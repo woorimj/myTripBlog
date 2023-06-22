@@ -8313,7 +8313,7 @@ fieldset:disabled .btn {
 
 .text-center {
   text-align: center !important;
-  font-family: "Indie Flower", cursive;
+  font-family: "blod";
 }
 
 .text-decoration-none {
@@ -11159,5 +11159,11 @@ fieldset:disabled .btn {
   }
   .d-print-none {
     display: none !important;
+  }
+  .rounded-image {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
   }
 }
