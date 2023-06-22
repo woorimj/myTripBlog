@@ -9,7 +9,9 @@
 <br>
 <div style="display: flex; justify-content: center">
     <a href="{%url 'create' %}">
+        {% if user.is_authenticated %}
         <h2>글작성</h2>
+        {% endif %}
     </a>
 </div>
 <br>
@@ -17,6 +19,7 @@
 <div style="padding-left: 100px; padding-right: 100px;">
     {% for post in posts %}
     <h3><a href="{% url 'post_detail' post.id %}">{{post.title}}</a></h3>
+    작성자: {{post.author}}<br>
     {{post.body}}
     <hr>
     {% endfor %}

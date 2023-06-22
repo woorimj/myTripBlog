@@ -14,7 +14,9 @@ def create(request):
         # 제대로 입력되었는지 검사하는 코드
         if form.is_valid(): 
             # 유효하다면 저장하는 코드
-            form.save() 
+            unfinished = form.save(commit=False)
+            unfinished.author = request.user
+            unfinished.save()
             return redirect('post_list') 
     else:
         form = PostModelForm() 
@@ -57,7 +59,8 @@ def create_comment(request, id):
 
     if filled_form.is_valid():        
         finished_form = filled_form.save(commit=False)      
-        finished_form.article = get_object_or_404(Post, pk=id)        
+        finished_form.article = get_object_or_404(Post, pk=id)   
+        finished_form.author = request.user     
         finished_form.save()   
     return redirect('post_detail', id)
 

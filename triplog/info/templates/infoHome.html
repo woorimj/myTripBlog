@@ -2,17 +2,25 @@
 {% load static %}
 
 {% block content %}
-
-<body>
-    <div class="login-form">
-        <h2>Login Form</h2>
-        <form>
-            <input type="text" placeholder="Username" required><br>
-            <input type="password" placeholder="Password" required><br>
-            <button type="submit">Login</button>
-        </form>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+    {% if user.is_authenticated %}
+    <h1>{{ user.username }}님</h1>
+    {% else %}
+    <div style="margin-bottom: 20px;">
+        <h1 style="font-size: 36px;">Triplog에 오신 걸 환영합니다</h1>
     </div>
-</body>
+    {% endif %}
+    <div style="display: flex;">
+        {% if user.is_authenticated %}
+        <button id="signup-btn" style="font-size: 24px; padding: 16px 32px; margin-right: 10px;"
+            onclick="location.href='/accounts/logout/'">로그아웃</button>
+        {% else %}
+        <button id="signup-btn" style="font-size: 24px; padding: 16px 32px; margin-right: 10px;"
+            onclick="location.href='/accounts/signup/'">회원가입</button>
+        <button id="login-btn" style="font-size: 24px; padding: 16px 32px;"
+            onclick="location.href='/accounts/login/'">로그인</button>
+        {% endif %}
+    </div>
+</div>
 
-</html>
 {% endblock %}

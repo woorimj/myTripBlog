@@ -43,8 +43,10 @@
 <div class="card mb-4">
     <div class="card-body">
         <div class="text-center">
+            {% if user.is_authenticated %}
             <button class="btn btn-primary" id="button-search" type="button" onclick="location.href='create'">글
                 작성</button>
+            {% endif %}
         </div>
         <br>
         <!--pagenation-->
@@ -71,6 +73,7 @@
     {% for post in posts %}
     <div class="content1 s-horizon">
         <h3><a href="{% url 'diary_detail' post.id %}">{{post.title}}</a></h3>
+        작성자: {{post.author}}<br>
         <br>
         {% if post.photo %}
         <img src="{{ post.photo.url }}" alt="" height="300">

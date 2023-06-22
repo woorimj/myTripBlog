@@ -8,29 +8,38 @@
 
 <h2>제목: {{post.title}} </h2>
 <h4>작성 시간: {{post.created_at}} </h4>
+<h4>작성자: {{ post.author }}</h4>
 <hr>
 <h3>사진</h3>
 {% if post.photo %}
 <img src="{{ post.photo.url }}" alt="" height="300">
 {% endif %}
 <p> {{post.body}} </p>
-
+{% if request.user == post.author %}
 <a href="{% url 'post_update' post.id %}">게시글 수정하기</a>
 <a href="{% url 'post_delete' post.id %}">게시글 삭제하기</a>
 
 <br><br>
+{% endif %}
 <hr>
 <h4>댓글</h4>
+{% if user.is_authenticated %}
 <form method="POST" action="{% url 'create_comment' post.id %}">
     {% csrf_token %}
     {{comment_form}}
     <input type="submit">
 </form>
+{% else %}
+로그인 후 사용해주세요!!
+{% endif %}
 <hr>
 {% for comment in post.comment_set.all %}
 <p>{{ comment }}</p>
+<p>작성자: {{ comment.author }}</p>
+{% if request.user == comment.author %}
 <a href="{% url 'update_comment' post.id comment.id %}">수정하기</a>
 <a href="{% url 'delete_comment' post.id comment.id %}">삭제하기</a>
+{% endif %}
 <hr>
 {% endfor %}
 {% endblock %}
