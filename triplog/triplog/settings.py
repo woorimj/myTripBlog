@@ -12,9 +12,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-__2$blr+l#3pl1#8@6&mxj#+-s_w1%qa+!o@_mdjkfd0j6q5*5"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'jenny0726.pythonanywhere.com'
+]
 
 
 # Application definition
@@ -28,7 +30,28 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     'blog', 'diary', 'info', 'contact', 'accounts',
+
+    # 소셜 로그인을 위한 설정
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.kakao',
 ]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -42,7 +65,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "triplog.urls"
 
-TEMPLATES = [
+TEMPLATES = [ 
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [],

@@ -39,6 +39,8 @@
     </style>
 </head>
 
+{% load socialaccount %}
+
 <body>
     <form class="user" method="POST">
         <h1>로그인</h1>
@@ -51,6 +53,13 @@
         </div>
         <input type="submit" value="로그인">
         <hr>
+        <a href="{% provider_login_url 'google' %}">
+            <i>구글 로그인</i>
+        </a>
+        <hr>
+        <a href="{% provider_login_url 'kakao' %}">
+            <i>카카오 로그인</i>
+        </a>
     </form>
 </body>
 
